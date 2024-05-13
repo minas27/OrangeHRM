@@ -1,5 +1,6 @@
 package autotests;
 
+import business.pages.LeftMenuComponent;
 import business.pages.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,10 +14,17 @@ public class BaseTest {
 
     protected LoginPage loginPage;
 
+    protected LeftMenuComponent leftMenuComponent;
+
     public BaseTest() {
         WebDriverManager.chromedriver().setup();
         chromeDriver = new ChromeDriver();
         loginPage = new LoginPage(chromeDriver);
+        leftMenuComponent = new LeftMenuComponent(chromeDriver);
+    }
+
+    public static ChromeDriver getDriver(){
+        return chromeDriver;
     }
 
     @BeforeMethod

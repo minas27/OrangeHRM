@@ -35,6 +35,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isOnLoginPage() {
+        waitHelper.waitUntilVisibility(usernameInput);
         return usernameInput.isDisplayed();
     }
 }

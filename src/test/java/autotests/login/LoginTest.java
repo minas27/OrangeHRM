@@ -1,6 +1,8 @@
 package autotests.login;
 
 import autotests.BaseTest;
+import business.pages.DashboardPage;
+import business.pages.LeftMenuComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,5 +14,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillInUsername("Admin");
         loginPage.fillInPassword("admin123");
         loginPage.clickOnLogin();
+        leftMenuComponent.clickOnExpandButton();
+        Assert.assertFalse(leftMenuComponent.isLeftMenuExpanded());
     }
 }
