@@ -8,6 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
 
+    @FindBy(css = "[title=\"Help\"]")
+    private WebElement helpCenterButton;
+
     public WaitHelper waitHelper;
 
     public BasePage(WebDriver driver){
@@ -15,5 +18,8 @@ public class BasePage {
         waitHelper = new WaitHelper(driver);
     }
 
-
+    public void clickOnHelpButton(){
+        waitHelper.waitUntilVisibility(helpCenterButton);
+        helpCenterButton.click();
+    }
 }

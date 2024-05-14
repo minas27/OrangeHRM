@@ -66,4 +66,16 @@ public class LeftMenuComponent extends BasePage {
         waitHelper.waitUntilVisibility(adminPageButton);
         return !adminPageButton.getAttribute("class").contains("toggle");
     }
+
+    public AdminPage goToAdminPage(WebDriver driver){
+        waitHelper.waitUntilVisibility(adminPageButton);
+        adminPageButton.click();
+        return new AdminPage(driver);
+    }
+
+    public DashboardPage goToDashboardPage(WebDriver driver){
+        waitHelper.waitUntilVisibility(dashboardPageButton);
+        dashboardPageButton.click();
+        return new DashboardPage(driver);
+    }
 }
