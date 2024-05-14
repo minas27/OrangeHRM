@@ -1,8 +1,6 @@
 package autotests.login;
 
 import autotests.BaseTest;
-import business.pages.DashboardPage;
-import business.pages.LeftMenuComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

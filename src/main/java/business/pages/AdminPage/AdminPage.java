@@ -1,4 +1,4 @@
-package business.pages;
+package business.pages.AdminPage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;
