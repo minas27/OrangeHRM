@@ -1,6 +1,5 @@
 package business.pages.AdminPage.JobSection;
 
-import business.BasePage;
 import business.pages.AdminPage.AdminPage;
 import org.openqa.selenium.WebDriver;
 
