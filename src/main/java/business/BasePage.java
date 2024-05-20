@@ -13,13 +13,20 @@ public class BasePage {
 
     public WaitHelper waitHelper;
 
+    private WebDriver driver;
+
     public BasePage(WebDriver driver){
         PageFactory.initElements(driver, this);
         waitHelper = new WaitHelper(driver);
+        this.driver = driver;
     }
 
     public void clickOnHelpButton(){
         waitHelper.waitUntilVisibility(helpCenterButton);
         helpCenterButton.click();
+    }
+
+    public WebDriver getDriver(){
+        return driver;
     }
 }
