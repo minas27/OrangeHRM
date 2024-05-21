@@ -1,6 +1,7 @@
 package business.pages;
 
 import business.BasePage;
+import business.pages.DashboardPage.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,4 +39,5 @@ public class LoginPage extends BasePage {
         waitHelper.waitUntilVisibility(usernameInput);
         return usernameInput.isDisplayed();
     }
+
 }

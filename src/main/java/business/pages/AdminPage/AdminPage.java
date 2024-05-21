@@ -36,6 +36,7 @@ public class AdminPage extends BasePage {
     }
 
     public UserManagementSection openUsersSection(WebDriver driver){
+        waitHelper.waitUntilVisibility(userManagementMenuSection);
         userManagementMenuSection.click();
         waitHelper.waitUntilVisibility(userManagementMenuUsersSection);
         userManagementMenuUsersSection.click();

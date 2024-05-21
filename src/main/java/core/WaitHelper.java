@@ -1,5 +1,6 @@
 package core;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,6 +33,16 @@ public class WaitHelper {
     public  void waitUntilClickable(WebElement element){
         new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitUntilVisibility(By locator, int sec){
+        new WebDriverWait(driver, Duration.ofSeconds(sec))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitUntilVisibility(By locator){
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public void pause(int sec) throws InterruptedException {

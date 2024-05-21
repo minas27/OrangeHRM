@@ -80,4 +80,5 @@ public class LeftMenuComponent extends BasePage {
         dashboardPageButton.click();
         return new DashboardPage(driver);
     }
+
 }

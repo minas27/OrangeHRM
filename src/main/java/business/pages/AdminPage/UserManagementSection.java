@@ -1,14 +1,13 @@
 package business.pages.AdminPage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class UserManagementSection extends AdminPage {
 
-    @FindBy(css = ".oxd-input.oxd-input--focus")
+    @FindBy(css = "div[class='oxd-input-group oxd-input-field-bottom-space'] div input[class='oxd-input oxd-input--active']")
     private WebElement userSearchUsernameInput;
 
     @FindBy(css = "(//div[contains(text(),'-- Select --')])[1]")
@@ -41,8 +40,8 @@ public class UserManagementSection extends AdminPage {
     @FindBy(xpath = "//button[normalize-space()='Add']")
     private WebElement addNewUserBtn;
 
-    @FindBy(xpath = "//div[contains(text(),'%s')]")
-    private WebElement searchResult;
+//    @FindBy(xpath = "//div[contains(text(),'%s')]")
+//    private WebElement searchResult;
 
     public UserManagementSection(WebDriver driver) {
         super(driver);
@@ -105,14 +104,34 @@ public class UserManagementSection extends AdminPage {
     }
 
     public boolean isSearchResultDisplayed(String searchText) {
-        String formattedXpath = String.format("//div[contains(text(),'%s')]", searchText);
+        String formattedXpath = String.format("//div[text() = '%s']", searchText);
 
         try {
+            waitHelper.waitUntilVisibility(By.xpath(formattedXpath));
             WebElement searchResult = getDriver().findElement(By.xpath(formattedXpath));
             return searchResult.isDisplayed();
-        }
-        catch (NoSuchElementException e) {
+
+        } catch (NoSuchElementException | TimeoutException e) {
             return false;
+        }
+    }
+
+    public void deleteUserByUsername(String username) {
+        List<WebElement> rows = getDriver().findElements(By.className("oxd-table-row"));
+
+        for (WebElement row : rows) {
+            WebElement usernameCell;
+            try {
+                usernameCell = row.findElement(By.xpath(".//div[@role='cell' and contains(text(), '" + username + "')]"));
+            } catch (NoSuchElementException e) {
+                continue;
+            }
+
+            if (usernameCell != null) {
+                WebElement deleteButton = row.findElement(By.xpath(".//button[contains(@class, 'bi-trash')]"));
+                deleteButton.click();
+                break;
+            }
         }
     }
 }

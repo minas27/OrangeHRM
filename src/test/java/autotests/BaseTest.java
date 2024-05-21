@@ -1,7 +1,11 @@
 package autotests;
 
+import business.pages.AdminPage.AdminPage;
+import business.pages.AdminPage.UserManagementSection;
+import business.pages.DashboardPage.DashboardPage;
 import business.pages.LeftMenuComponent;
 import business.pages.LoginPage;
+import core.ActionsHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
@@ -16,11 +20,23 @@ public class BaseTest {
 
     protected LeftMenuComponent leftMenuComponent;
 
+    protected DashboardPage dashboardPage;
+
+    protected AdminPage adminPage;
+
+    protected UserManagementSection userManagementSection;
+
+    protected static ActionsHelper actionsHelper;
+
     public BaseTest() {
         WebDriverManager.chromedriver().setup();
         chromeDriver = new ChromeDriver();
+        actionsHelper = new ActionsHelper();
         loginPage = new LoginPage(chromeDriver);
         leftMenuComponent = new LeftMenuComponent(chromeDriver);
+        dashboardPage = new DashboardPage(chromeDriver);
+        adminPage = new AdminPage(chromeDriver);
+        userManagementSection = new UserManagementSection(chromeDriver);
     }
 
     public static ChromeDriver getDriver(){
