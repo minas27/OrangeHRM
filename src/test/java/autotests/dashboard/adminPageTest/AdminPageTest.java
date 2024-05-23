@@ -15,10 +15,26 @@ public class AdminPageTest extends BaseTest {
         leftMenuComponent
                 .goToAdminPage(getDriver())
                 .openUsersSection(getDriver())
-                .searchEnterUsername("sandip123")
+                .searchEnterUsername("Admin")
                 .clickOnSearch();
         ActionsHelper.scrollDown(getDriver(), 300);
-        Assert.assertTrue(userManagementSection.isSearchResultDisplayed("sandip123"));
+        Assert.assertTrue(userManagementSection.isSearchResultDisplayed("Admin"));
+    }
+
+    @Test
+    public void testUserDeletionFunctionality(){
+        loginPage.fillInUsername("Admin");
+        loginPage.fillInPassword("admin123");
+        loginPage.clickOnLogin();
+        leftMenuComponent
+                .goToAdminPage(getDriver())
+                .openUsersSection(getDriver())
+                .searchEnterUsername("FMLName")
+                .clickOnSearch();
+        ActionsHelper.scrollDown(getDriver(), 300);
+        Assert.assertTrue(userManagementSection.isSearchResultDisplayed("FMLName"));
+        userManagementSection.deleteUserByUsername("FMLName");
+        Assert.assertFalse(userManagementSection.isSearchResultDisplayed("FMLName"));
     }
 
 }

@@ -40,8 +40,11 @@ public class UserManagementSection extends AdminPage {
     @FindBy(xpath = "//button[normalize-space()='Add']")
     private WebElement addNewUserBtn;
 
-//    @FindBy(xpath = "//div[contains(text(),'%s')]")
-//    private WebElement searchResult;
+    @FindBy(xpath = "//button[normalize-space()='Yes, Delete']")
+    private WebElement yesDeleteBtn;
+
+    @FindBy(xpath = "//button[normalize-space()='No, Cancel']")
+    private WebElement noCancelBtn;
 
     public UserManagementSection(WebDriver driver) {
         super(driver);
@@ -128,8 +131,10 @@ public class UserManagementSection extends AdminPage {
             }
 
             if (usernameCell != null) {
-                WebElement deleteButton = row.findElement(By.xpath(".//button[contains(@class, 'bi-trash')]"));
+                WebElement deleteButton = row.findElement(By.className("bi-trash"));
                 deleteButton.click();
+                waitHelper.waitUntilVisibility(yesDeleteBtn);
+                yesDeleteBtn.click();
                 break;
             }
         }

@@ -24,6 +24,7 @@ public class LoginPage extends BasePage {
     }
 
     public void fillInUsername(String username) {
+        waitHelper.waitUntilVisibility(usernameInput);
         usernameInput.sendKeys(username);
     }
 
