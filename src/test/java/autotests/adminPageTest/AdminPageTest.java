@@ -1,4 +1,4 @@
-package autotests.dashboard.adminPageTest;
+package autotests.adminPageTest;
 
 import autotests.BaseTest;
 import core.ActionsHelper;

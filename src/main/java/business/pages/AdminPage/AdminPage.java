@@ -16,7 +16,7 @@ public class AdminPage extends BasePage {
     @FindBy(xpath = "//span[normalize-space()='Job']")
     private WebElement jobMenuSection;
 
-    @FindBy(xpath = "//span[normalize-space()='Job']")
+    @FindBy(xpath = "//a[normalize-space()='Job Titles']")
     private WebElement jobMenuJobTitlesSection;
 
     @FindBy(xpath = "//a[normalize-space()='Pay Grades']")
@@ -44,6 +44,7 @@ public class AdminPage extends BasePage {
     }
 
     public JobTitlesSection openJobTitles(WebDriver driver){
+        waitHelper.waitUntilVisibility(jobMenuSection);
         jobMenuSection.click();
         waitHelper.waitUntilVisibility(jobMenuJobTitlesSection);
         jobMenuJobTitlesSection.click();

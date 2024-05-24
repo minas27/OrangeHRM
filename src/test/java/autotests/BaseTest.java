@@ -1,6 +1,7 @@
 package autotests;
 
 import business.pages.AdminPage.AdminPage;
+import business.pages.AdminPage.JobSection.JobTitlesSection;
 import business.pages.AdminPage.UserManagementSection;
 import business.pages.DashboardPage.DashboardPage;
 import business.pages.LeftMenuComponent;
@@ -26,6 +27,8 @@ public class BaseTest {
 
     protected UserManagementSection userManagementSection;
 
+    protected JobTitlesSection jobTitlesSection;
+
     protected static ActionsHelper actionsHelper;
 
     public BaseTest() {
@@ -37,6 +40,7 @@ public class BaseTest {
         dashboardPage = new DashboardPage(chromeDriver);
         adminPage = new AdminPage(chromeDriver);
         userManagementSection = new UserManagementSection(chromeDriver);
+        jobTitlesSection = new JobTitlesSection(chromeDriver);
     }
 
     public static ChromeDriver getDriver(){

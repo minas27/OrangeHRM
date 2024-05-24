@@ -2,8 +2,7 @@ package business.pages.AdminPage.JobSection;
 
 import business.pages.AdminPage.AdminPage;
 import core.ActionsHelper;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class JobTitlesSection extends AdminPage {
@@ -28,6 +27,27 @@ public class JobTitlesSection extends AdminPage {
     @FindBy(xpath = "//button[normalize-space()='Save']")
     private WebElement saveBtn;
 
+    public JobTitlesSection(WebDriver driver) {
+        super(driver);
+    }
+
+    public JobTitlesSection enterJobTitle(String jobTitle){
+        waitHelper.waitUntilVisibility(jobTitleInput);
+        jobTitleInput.sendKeys(jobTitle);
+        return this;
+    }
+
+    public JobTitlesSection enterJobDescription(String jobDescription){
+        waitHelper.waitUntilVisibility(jobDescriptionInput);
+        jobDescriptionInput.sendKeys(jobDescription);
+        return this;
+    }
+
+    public JobTitlesSection enterNotes(String notes){
+        waitHelper.waitUntilVisibility(addNoteInput);
+        addNoteInput.sendKeys(notes);
+        return this;
+    }
 
     public JobTitlesSection clickOnCancel(WebDriver driver){
         ActionsHelper.scrollDown(driver, 350);
@@ -43,7 +63,15 @@ public class JobTitlesSection extends AdminPage {
         return this;
     }
 
-    public JobTitlesSection(WebDriver driver) {
-        super(driver);
+    public boolean isJobDisplayed(String jobTitle){
+        try {
+            waitHelper.waitUntilVisibility(By.xpath("//div[contains(text(),'" + jobTitle + "')]"));
+            WebElement jobTitleSearch = getDriver().findElement(By.xpath("//div[contains(text(),'" + jobTitle + "')]"));
+            return  jobTitleSearch.isDisplayed();
+        }
+        catch (NoSuchElementException | TimeoutException e){
+            return false;
+        }
     }
+
 }
