@@ -31,6 +31,12 @@ public class JobTitlesSection extends AdminPage {
         super(driver);
     }
 
+    public JobTitlesSection clickOnAddBtn(){
+        waitHelper.waitUntilVisibility(addBtn);
+        addBtn.click();
+        return this;
+    }
+
     public JobTitlesSection enterJobTitle(String jobTitle){
         waitHelper.waitUntilVisibility(jobTitleInput);
         jobTitleInput.sendKeys(jobTitle);
@@ -56,8 +62,7 @@ public class JobTitlesSection extends AdminPage {
         return this;
     }
 
-    public JobTitlesSection clickOnSave(WebDriver driver){
-        ActionsHelper.scrollDown(driver, 350);
+    public JobTitlesSection clickOnSave(){
         waitHelper.waitUntilVisibility(saveBtn);
         saveBtn.click();
         return this;
