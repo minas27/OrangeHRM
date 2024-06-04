@@ -119,24 +119,27 @@ public class UserManagementSection extends AdminPage {
         }
     }
 
-    public void deleteUserByUsername(String username) {
+    //TODO implement find UserNameRowElement by given username
+    public WebElement findRowOfUserByUsername(String username){
         List<WebElement> rows = getDriver().findElements(By.className("oxd-table-row"));
-
+        WebElement usernameCell = null;
         for (WebElement row : rows) {
-            WebElement usernameCell;
             try {
-                usernameCell = row.findElement(By.xpath(".//div[@role='cell' and contains(text(), '" + username + "')]"));
+                usernameCell = row.findElement(By.xpath(".//div[@role='row' and contains(text(), '" + username + "')]"));
             } catch (NoSuchElementException e) {
                 continue;
             }
+        }
+        return usernameCell;
+    }
 
-            if (usernameCell != null) {
-                WebElement deleteButton = row.findElement(By.className("bi-trash"));
+    //TODO implement delete user with given username value
+    public void deleteUserByUsername(String username) {
+            if (findRowOfUserByUsername(username) != null) {
+                WebElement deleteButton = findRowOfUserByUsername(username).findElement(By.className("bi-trash"));
                 deleteButton.click();
                 waitHelper.waitUntilVisibility(yesDeleteBtn);
                 yesDeleteBtn.click();
-                break;
             }
         }
-    }
 }

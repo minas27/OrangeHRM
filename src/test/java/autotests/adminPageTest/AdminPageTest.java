@@ -5,6 +5,8 @@ import core.ActionsHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static core.ActionsHelper.scrollDown;
+
 public class AdminPageTest extends BaseTest {
     @Test
     public void testUserSearchFunctionalityInAdminPage() {
@@ -17,7 +19,7 @@ public class AdminPageTest extends BaseTest {
                 .openUsersSection(getDriver())
                 .searchEnterUsername("Admin")
                 .clickOnSearch();
-        ActionsHelper.scrollDown(getDriver(), 300);
+        scrollDown(getDriver(), 300);
         Assert.assertTrue(userManagementSection.isSearchResultDisplayed("Admin"));
     }
 
@@ -31,7 +33,7 @@ public class AdminPageTest extends BaseTest {
                 .openUsersSection(getDriver())
                 .searchEnterUsername("FMLName")
                 .clickOnSearch();
-        ActionsHelper.scrollDown(getDriver(), 300);
+        scrollDown(getDriver(), 300);
         Assert.assertTrue(userManagementSection.isSearchResultDisplayed("FMLName"));
         userManagementSection.deleteUserByUsername("FMLName");
         Assert.assertFalse(userManagementSection.isSearchResultDisplayed("FMLName"));
