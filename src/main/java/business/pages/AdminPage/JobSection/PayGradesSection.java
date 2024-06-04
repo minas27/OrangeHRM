@@ -46,6 +46,12 @@ public class PayGradesSection extends AdminPage {
         return this;
     }
 
+    public PayGradesSection enterName(String name){
+        waitHelper.waitUntilVisibility(nameInput);
+        nameInput.sendKeys(name);
+        return this;
+    }
+
     //TODO add remove and edit functionality for a given grade
 
     public Boolean isRequiredMessageDisplayed(){
