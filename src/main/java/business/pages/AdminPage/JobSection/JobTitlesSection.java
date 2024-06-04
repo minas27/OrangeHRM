@@ -68,6 +68,11 @@ public class JobTitlesSection extends AdminPage {
         return this;
     }
 
+    //TODO implement delete functionality by passing job name
+    public JobTitlesSection deleteJob(String jobTitle){
+        return this;
+    }
+
     public boolean isJobDisplayed(String jobTitle){
         try {
             waitHelper.waitUntilVisibility(By.xpath("//div[contains(text(),'" + jobTitle + "')]"));

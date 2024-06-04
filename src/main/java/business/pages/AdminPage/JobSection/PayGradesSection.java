@@ -40,6 +40,14 @@ public class PayGradesSection extends AdminPage {
         return this;
     }
 
+    public PayGradesSection clickOnAdd(){
+        waitHelper.waitUntilVisibility(addBtn);
+        addBtn.click();
+        return this;
+    }
+
+    //TODO add remove and edit functionality for a given grade
+
     public Boolean isRequiredMessageDisplayed(){
         try {
             waitHelper.waitUntilVisibility(requiredWarningMessage);
