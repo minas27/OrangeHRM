@@ -1,9 +1,10 @@
 package autotests;
 
-import business.pages.AdminPage.AdminPage;
-import business.pages.AdminPage.JobSection.JobTitlesSection;
-import business.pages.AdminPage.UserManagementSection;
-import business.pages.DashboardPage.DashboardPage;
+import business.pages.adminPage.AdminPage;
+import business.pages.adminPage.JobSection.JobTitlesSection;
+import business.pages.adminPage.JobSection.WorkShiftsSection;
+import business.pages.adminPage.UserManagementSection;
+import business.pages.dashboardPage.DashboardPage;
 import business.pages.LeftMenuComponent;
 import business.pages.LoginPage;
 import core.ActionsHelper;
@@ -29,7 +30,11 @@ public class BaseTest {
 
     protected JobTitlesSection jobTitlesSection;
 
+    protected WorkShiftsSection workShiftsSection;
+
     protected static ActionsHelper actionsHelper;
+
+
 
     public BaseTest() {
         WebDriverManager.chromedriver().setup();
@@ -41,6 +46,7 @@ public class BaseTest {
         adminPage = new AdminPage(chromeDriver);
         userManagementSection = new UserManagementSection(chromeDriver);
         jobTitlesSection = new JobTitlesSection(chromeDriver);
+        workShiftsSection = new WorkShiftsSection(chromeDriver);
     }
 
     public static ChromeDriver getDriver(){

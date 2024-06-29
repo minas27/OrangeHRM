@@ -1,6 +1,6 @@
-package business.pages.AdminPage.JobSection;
+package business.pages.adminPage.JobSection;
 
-import business.pages.AdminPage.AdminPage;
+import business.pages.adminPage.AdminPage;
 import core.ActionsHelper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;

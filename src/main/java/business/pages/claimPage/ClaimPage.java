@@ -1,4 +1,4 @@
-package business.pages.ClaimPage;
+package business.pages.claimPage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

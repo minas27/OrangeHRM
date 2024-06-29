@@ -1,8 +1,8 @@
 package business.pages;
 
 import business.BasePage;
-import business.pages.AdminPage.AdminPage;
-import business.pages.DashboardPage.DashboardPage;
+import business.pages.adminPage.AdminPage;
+import business.pages.dashboardPage.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

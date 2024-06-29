@@ -1,6 +1,6 @@
-package business.pages.AdminPage.JobSection;
+package business.pages.adminPage.JobSection;
 
-import business.pages.AdminPage.AdminPage;
+import business.pages.adminPage.AdminPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

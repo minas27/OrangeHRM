@@ -1,4 +1,4 @@
-package business.pages.BuzzPage;
+package business.pages.buzzPage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

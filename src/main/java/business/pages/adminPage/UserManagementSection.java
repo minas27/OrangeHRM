@@ -1,4 +1,4 @@
-package business.pages.AdminPage;
+package business.pages.adminPage;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;

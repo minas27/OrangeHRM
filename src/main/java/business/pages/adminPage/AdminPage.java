@@ -1,7 +1,7 @@
-package business.pages.AdminPage;
+package business.pages.adminPage;
 
 import business.BasePage;
-import business.pages.AdminPage.JobSection.*;
+import business.pages.adminPage.JobSection.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -73,6 +73,7 @@ public class AdminPage extends BasePage {
     }
 
     public WorkShiftsSection openWorkShifts(WebDriver driver){
+        waitHelper.waitUntilVisibility(jobMenuSection);
         jobMenuSection.click();
         waitHelper.waitUntilVisibility(jobMenuWorkShiftsSection);
         jobMenuWorkShiftsSection.click();

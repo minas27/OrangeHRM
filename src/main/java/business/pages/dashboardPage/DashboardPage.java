@@ -1,4 +1,4 @@
-package business.pages.DashboardPage;
+package business.pages.dashboardPage;
 
 import business.BasePage;
 import business.pages.LeavePage.AssignLeaveSection;
