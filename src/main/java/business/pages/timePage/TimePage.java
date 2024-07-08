@@ -1,4 +1,4 @@
-package business.pages.TimePage;
+package business.pages.timePage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package business.pages.adminPage.JobSection;
+package business.pages.adminPage.jobSection;
 
 import business.pages.adminPage.AdminPage;
 import core.ActionsHelper;

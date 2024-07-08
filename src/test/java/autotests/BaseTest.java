@@ -1,8 +1,8 @@
 package autotests;
 
 import business.pages.adminPage.AdminPage;
-import business.pages.adminPage.JobSection.JobTitlesSection;
-import business.pages.adminPage.JobSection.WorkShiftsSection;
+import business.pages.adminPage.jobSection.JobTitlesSection;
+import business.pages.adminPage.jobSection.WorkShiftsSection;
 import business.pages.adminPage.UserManagementSection;
 import business.pages.dashboardPage.DashboardPage;
 import business.pages.LeftMenuComponent;

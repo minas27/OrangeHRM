@@ -1,7 +1,7 @@
 package business.pages.dashboardPage;
 
 import business.BasePage;
-import business.pages.LeavePage.AssignLeaveSection;
+import business.pages.leavePage.AssignLeaveSection;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

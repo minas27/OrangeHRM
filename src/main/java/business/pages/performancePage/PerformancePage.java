@@ -1,4 +1,4 @@
-package business.pages.PerformancePage;
+package business.pages.performancePage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

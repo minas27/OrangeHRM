@@ -1,4 +1,4 @@
-package business.pages.LeavePage;
+package business.pages.leavePage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package business.pages.MyInfoPage;
+package business.pages.myInfoPage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

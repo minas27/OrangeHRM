@@ -1,10 +1,7 @@
-package business.pages.adminPage.JobSection;
+package business.pages.adminPage.jobSection;
 
 import business.pages.adminPage.AdminPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class WorkShiftsSection extends AdminPage {
@@ -59,6 +56,13 @@ public class WorkShiftsSection extends AdminPage {
 
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message']")
     private WebElement requiredWarningMessage;
+
+    @FindBy(xpath = "//button[normalize-space()='No, Cancel']")
+    private WebElement cancelBtnForDeleting;
+
+    @FindBy(xpath = "//button[normalize-space()='Yes, Delete']")
+    private WebElement yesDeletBtn;
+
 
 
     public WorkShiftsSection clickOnAdd(){
@@ -154,11 +158,28 @@ public class WorkShiftsSection extends AdminPage {
         return row;
     }
 
+    public WorkShiftsSection clickOnDeleteBtnByName(String name){
+        findRowByName(name).findElement(By.cssSelector("button.oxd-icon-button")).click();
+        return this;
+    }
+
+    public WorkShiftsSection clickOnCancelBtnOfDelete(){
+        waitHelper.waitUntilVisibility(cancelBtnForDeleting);
+        cancelBtnForDeleting.click();
+        return this;
+    }
+
+    public WorkShiftsSection clickOnYesDeleteBtn(){
+        waitHelper.waitUntilVisibility(yesDeletBtn);
+        yesDeletBtn.click();
+        return this;
+    }
+
     public Boolean isAddedShiftDisplayed(String workshiftName){
         try {
-            waitHelper.waitUntilVisibility(getWorkshiftByName(workshiftName));
+            waitHelper.waitUntilVisibility(getWorkshiftByName(workshiftName), 3);
             return getWorkshiftByName(workshiftName).isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | TimeoutException e) {
             return false;
         }
     }

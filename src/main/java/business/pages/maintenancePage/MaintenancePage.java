@@ -1,4 +1,4 @@
-package business.pages.MaintenancePage;
+package business.pages.maintenancePage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

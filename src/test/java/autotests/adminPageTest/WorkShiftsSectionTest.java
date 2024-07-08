@@ -30,4 +30,19 @@ public class WorkShiftsSectionTest extends BaseTest {
                 .clickOnSave();
         Assert.assertTrue(workShiftsSection.isAddedShiftDisplayed("Nighty"));
     }
+    @Test
+    public void checkWorkShiftDeletingFunctionality() {
+        Assert.assertTrue(loginPage.isOnLoginPage());
+        loginPage.fillInUsername("Admin");
+        loginPage.fillInPassword("admin123");
+        loginPage.clickOnLogin();
+        leftMenuComponent
+                .goToAdminPage(getDriver())
+                .openWorkShifts(getDriver());
+        Assert.assertTrue(workShiftsSection.isAddedShiftDisplayed("Nighty"));
+        workShiftsSection
+                .clickOnDeleteBtnByName("Nighty")
+                .clickOnYesDeleteBtn();
+        Assert.assertFalse(workShiftsSection.isAddedShiftDisplayed("Nighty"));
+    }
 }

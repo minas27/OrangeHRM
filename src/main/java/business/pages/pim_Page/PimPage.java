@@ -1,4 +1,4 @@
-package business.pages.PIM_Page;
+package business.pages.pim_Page;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

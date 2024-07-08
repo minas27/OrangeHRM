@@ -1,4 +1,4 @@
-package business.pages.DirectoryPage;
+package business.pages.directoryPage;
 
 import business.BasePage;
 import org.openqa.selenium.WebDriver;

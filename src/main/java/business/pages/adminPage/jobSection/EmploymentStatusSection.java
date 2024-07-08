@@ -1,4 +1,4 @@
-package business.pages.adminPage.JobSection;
+package business.pages.adminPage.jobSection;
 
 import business.pages.adminPage.AdminPage;
 import org.openqa.selenium.NoSuchElementException;
@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class JobCategoriesSection extends AdminPage {
-    public JobCategoriesSection(WebDriver driver) {
+public class EmploymentStatusSection extends AdminPage {
+    public EmploymentStatusSection(WebDriver driver) {
         super(driver);
     }
 
@@ -26,25 +26,25 @@ public class JobCategoriesSection extends AdminPage {
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message']")
     private WebElement requiredWarningMessage;
 
-    public JobCategoriesSection clickOnAdd(){
+    public EmploymentStatusSection clickOnAdd(){
         waitHelper.waitUntilVisibility(addBtn);
         addBtn.click();
         return this;
     }
 
-    public JobCategoriesSection enterName(String name){
+    public EmploymentStatusSection enterName(String name){
         waitHelper.waitUntilVisibility(nameInput);
         nameInput.sendKeys(name);
         return this;
     }
 
-    public JobCategoriesSection clickOnCancel(){
+    public EmploymentStatusSection clickOnCancel(){
         waitHelper.waitUntilVisibility(cancelBtn);
         cancelBtn.click();
         return this;
     }
 
-    public JobCategoriesSection clickOnSave(){
+    public EmploymentStatusSection clickOnSave(){
         waitHelper.waitUntilVisibility(saveBtn);
         saveBtn.click();
         return this;
