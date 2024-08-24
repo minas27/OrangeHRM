@@ -4,6 +4,8 @@ import business.pages.adminPage.AdminPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import static core.ActionsHelper.*;
+
 public class WorkShiftsSection extends AdminPage {
     public WorkShiftsSection(WebDriver driver) {
         super(driver);
@@ -66,82 +68,69 @@ public class WorkShiftsSection extends AdminPage {
 
 
     public WorkShiftsSection clickOnAdd(){
-        waitHelper.waitUntilVisibility(addBtn);
-        addBtn.click();
+        click(addBtn);
         return this;
     }
 
     //TODO implement delete and edit options for existing statuses
 
     public WorkShiftsSection enterShiftName(String shiftName){
-        waitHelper.waitUntilVisibility(shiftNameInput);
-        shiftNameInput.sendKeys(shiftName);
+        insertData(shiftNameInput, shiftName);
         return this;
     }
 
     public WorkShiftsSection clickOnWorkingHoursFromBtn(){
-        waitHelper.waitUntilVisibility(workingHoursFrom);
-        workingHoursFrom.click();
+        click(workingHoursFrom);
         return this;
     }
 
     public WorkShiftsSection clickOnWorkingHoursToBtn(){
-        waitHelper.waitUntilVisibility(workingHoursTo);
-        workingHoursTo.click();
+        click(workingHoursTo);
         return this;
     }
 
     public WorkShiftsSection increaseHours(){
-        waitHelper.waitUntilVisibility(increaseHourBtn);
-        increaseHourBtn.click();
+        click(increaseHourBtn);
         return this;
     }
 
     public WorkShiftsSection decreaseHours(){
-        waitHelper.waitUntilVisibility(decreaseHourBtn);
-        decreaseHourBtn.click();
+        click(decreaseHourBtn);
         return this;
     }
 
     public WorkShiftsSection increaseMinutes(){
-        waitHelper.waitUntilVisibility(increaseMinuteBtn);
-        increaseMinuteBtn.click();
+        click(increaseMinuteBtn);
         return this;
     }
 
     public WorkShiftsSection decreaseMinutes(){
-        waitHelper.waitUntilVisibility(decreaseMinuteBtn);
-        decreaseMinuteBtn.click();
+        click(decreaseMinuteBtn);
         return this;
     }
 
     public WorkShiftsSection selectAM(){
-        waitHelper.waitUntilVisibility(timeAMBtn);
-        timeAMBtn.click();
+        click(timeAMBtn);
         return this;
     }
 
     public WorkShiftsSection selectPM(){
-        waitHelper.waitUntilVisibility(timePMBtn);
-        timePMBtn.click();
+        click(timePMBtn);
         return this;
     }
 
     public WorkShiftsSection enterHints(String hints){
-        waitHelper.waitUntilVisibility(assignedEmployeesInput);
-        assignedEmployeesInput.sendKeys(hints);
+        insertData(assignedEmployeesInput, hints);
         return this;
     }
 
     public WorkShiftsSection clickOnCancel(){
-        waitHelper.waitUntilVisibility(cancelBtn);
-        cancelBtn.click();
+        click(cancelBtn);
         return this;
     }
 
     public WorkShiftsSection clickOnSave(){
-        waitHelper.waitUntilVisibility(saveBtn);
-        saveBtn.click();
+        click(saveBtn);
         return this;
     }
 
@@ -164,23 +153,16 @@ public class WorkShiftsSection extends AdminPage {
     }
 
     public WorkShiftsSection clickOnCancelBtnOfDelete(){
-        waitHelper.waitUntilVisibility(cancelBtnForDeleting);
-        cancelBtnForDeleting.click();
+        click(cancelBtnForDeleting);
         return this;
     }
 
     public WorkShiftsSection clickOnYesDeleteBtn(){
-        waitHelper.waitUntilVisibility(yesDeletBtn);
-        yesDeletBtn.click();
+        click(yesDeletBtn);
         return this;
     }
 
     public Boolean isAddedShiftDisplayed(String workshiftName){
-        try {
-            waitHelper.waitUntilVisibility(getWorkshiftByName(workshiftName), 3);
-            return getWorkshiftByName(workshiftName).isDisplayed();
-        } catch (NoSuchElementException | TimeoutException e) {
-            return false;
-        }
+        return  isDisplayed(getWorkshiftByName(workshiftName));
     }
 }

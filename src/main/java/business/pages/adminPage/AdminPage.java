@@ -2,9 +2,12 @@ package business.pages.adminPage;
 
 import business.BasePage;
 import business.pages.adminPage.jobSection.*;
+import core.ActionsHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static core.ActionsHelper.*;
 
 public class AdminPage extends BasePage {
     @FindBy(xpath = "//span[normalize-space()='User Management']")
@@ -36,47 +39,38 @@ public class AdminPage extends BasePage {
     }
 
     public UserManagementSection openUsersSection(WebDriver driver){
-        waitHelper.waitUntilVisibility(userManagementMenuSection);
-        userManagementMenuSection.click();
-        waitHelper.waitUntilVisibility(userManagementMenuUsersSection);
-        userManagementMenuUsersSection.click();
-        return new UserManagementSection(driver);
+        click(userManagementMenuSection);
+        click(userManagementMenuUsersSection);
+        return new UserManagementSection(getDriver());
     }
 
     public JobTitlesSection openJobTitles(WebDriver driver){
-        waitHelper.waitUntilVisibility(jobMenuSection);
-        jobMenuSection.click();
-        waitHelper.waitUntilVisibility(jobMenuJobTitlesSection);
-        jobMenuJobTitlesSection.click();
-        return new JobTitlesSection(driver);
+        click(jobMenuSection);
+        click(jobMenuJobTitlesSection);
+        return new JobTitlesSection(getDriver());
     }
 
     public PayGradesSection openPayGrades(WebDriver driver){
-        jobMenuSection.click();
-        waitHelper.waitUntilVisibility(jobMenuPayGradesSection);
-        jobMenuPayGradesSection.click();
-        return new PayGradesSection(driver);
+        click(jobMenuSection);
+        click(jobMenuPayGradesSection);
+        return new PayGradesSection(getDriver());
     }
 
     public EmploymentStatusSection openEmploymentStatus(WebDriver driver){
-        jobMenuSection.click();
-        waitHelper.waitUntilVisibility(jobMenuEmploymentStatusSection);
-        jobMenuEmploymentStatusSection.click();
-        return new EmploymentStatusSection(driver);
+        click(jobMenuSection);
+        click(jobMenuEmploymentStatusSection);
+        return new EmploymentStatusSection(getDriver());
     }
 
     public JobCategoriesSection openJobCategories(WebDriver driver){
-        jobMenuSection.click();
-        waitHelper.waitUntilVisibility(jobMenuJobCategoriesSection);
-        jobMenuJobCategoriesSection.click();
-        return new JobCategoriesSection(driver);
+        click(jobMenuSection);
+        click(jobMenuJobCategoriesSection);
+        return new JobCategoriesSection(getDriver());
     }
 
     public WorkShiftsSection openWorkShifts(WebDriver driver){
-        waitHelper.waitUntilVisibility(jobMenuSection);
-        jobMenuSection.click();
-        waitHelper.waitUntilVisibility(jobMenuWorkShiftsSection);
-        jobMenuWorkShiftsSection.click();
-        return new WorkShiftsSection(driver);
+        click(jobMenuSection);
+        click(jobMenuWorkShiftsSection);
+        return new WorkShiftsSection(getDriver());
     }
 }

@@ -1,10 +1,13 @@
 package business.pages.adminPage.jobSection;
 
 import business.pages.adminPage.AdminPage;
+import core.ActionsHelper;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static core.ActionsHelper.*;
 
 public class EmploymentStatusSection extends AdminPage {
     public EmploymentStatusSection(WebDriver driver) {
@@ -27,39 +30,28 @@ public class EmploymentStatusSection extends AdminPage {
     private WebElement requiredWarningMessage;
 
     public EmploymentStatusSection clickOnAdd(){
-        waitHelper.waitUntilVisibility(addBtn);
-        addBtn.click();
+        click(addBtn);
         return this;
     }
 
     public EmploymentStatusSection enterName(String name){
-        waitHelper.waitUntilVisibility(nameInput);
-        nameInput.sendKeys(name);
+        insertData(nameInput, name);
         return this;
     }
 
     public EmploymentStatusSection clickOnCancel(){
-        waitHelper.waitUntilVisibility(cancelBtn);
-        cancelBtn.click();
+        click(cancelBtn);
         return this;
     }
 
     public EmploymentStatusSection clickOnSave(){
-        waitHelper.waitUntilVisibility(saveBtn);
-        saveBtn.click();
+        click(saveBtn);
         return this;
     }
 
     //TODO implement delete and edit options for existing statuses
 
-    public Boolean isRequiredMessageDisplayed(){
-        try {
-            waitHelper.waitUntilVisibility(requiredWarningMessage);
-            return requiredWarningMessage.isDisplayed();
-        }
-
-        catch (NoSuchElementException e) {
-            return false;
-        }
+    public Boolean isRequiredMessageDisplayed() {
+        return isDisplayed(requiredWarningMessage);
     }
 }

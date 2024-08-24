@@ -5,6 +5,8 @@ import core.ActionsHelper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import static core.ActionsHelper.*;
+
 public class JobTitlesSection extends AdminPage {
     @FindBy(xpath = "//button[normalize-space()='Add']")
     private WebElement addBtn;
@@ -32,39 +34,33 @@ public class JobTitlesSection extends AdminPage {
     }
 
     public JobTitlesSection clickOnAddBtn(){
-        waitHelper.waitUntilVisibility(addBtn);
-        addBtn.click();
+        click(addBtn);
         return this;
     }
 
     public JobTitlesSection enterJobTitle(String jobTitle){
-        waitHelper.waitUntilVisibility(jobTitleInput);
-        jobTitleInput.sendKeys(jobTitle);
+        insertData(jobTitleInput, jobTitle);
         return this;
     }
 
     public JobTitlesSection enterJobDescription(String jobDescription){
-        waitHelper.waitUntilVisibility(jobDescriptionInput);
-        jobDescriptionInput.sendKeys(jobDescription);
+        insertData(jobDescriptionInput, jobDescription);
         return this;
     }
 
     public JobTitlesSection enterNotes(String notes){
-        waitHelper.waitUntilVisibility(addNoteInput);
-        addNoteInput.sendKeys(notes);
+        insertData(addNoteInput, notes);
         return this;
     }
 
     public JobTitlesSection clickOnCancel(WebDriver driver){
-        ActionsHelper.scrollDown(driver, 350);
-        waitHelper.waitUntilVisibility(cancelBtn);
-        cancelBtn.click();
+        scrollDown(driver, 350);
+        click(cancelBtn);
         return this;
     }
 
     public JobTitlesSection clickOnSave(){
-        waitHelper.waitUntilVisibility(saveBtn);
-        saveBtn.click();
+        click(saveBtn);
         return this;
     }
 

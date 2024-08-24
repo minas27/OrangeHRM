@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static core.WaitHelper.waitUntilVisibility;
+
 public class ActionsHelper {
     private static Select select;
 
@@ -21,6 +23,7 @@ public class ActionsHelper {
 
     public static boolean isDisplayed(WebElement element){
         try{
+            waitUntilVisibility(element);
             return element.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
@@ -31,4 +34,15 @@ public class ActionsHelper {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript(String.format("window.scrollBy(0, %s)", pixel));
     }
+
+    public static void click(WebElement element) {
+        waitUntilVisibility(element);
+        element.click();
+    }
+
+    public static void insertData(WebElement element, String data) {
+        waitUntilVisibility(element);
+        element.sendKeys(data);
+    }
+
 }

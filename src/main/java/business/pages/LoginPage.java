@@ -1,9 +1,12 @@
 package business.pages;
 
 import business.BasePage;
+import core.ActionsHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static core.ActionsHelper.*;
 
 public class LoginPage extends BasePage {
     @FindBy(css = "[placeholder=\"Username\"]")
@@ -23,8 +26,7 @@ public class LoginPage extends BasePage {
     }
 
     public void fillInUsername(String username) {
-        waitHelper.waitUntilVisibility(usernameInput);
-        usernameInput.sendKeys(username);
+        insertData(usernameInput, username);
     }
 
     public void fillInPassword(String password) {

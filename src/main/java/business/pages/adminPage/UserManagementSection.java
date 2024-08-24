@@ -1,9 +1,12 @@
 package business.pages.adminPage;
 
+import core.ActionsHelper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+
+import static core.ActionsHelper.*;
 
 public class UserManagementSection extends AdminPage {
 
@@ -51,58 +54,46 @@ public class UserManagementSection extends AdminPage {
     }
 
     public UserManagementSection searchEnterUsername(String username) {
-        waitHelper.waitUntilVisibility(userSearchUsernameInput);
-        userSearchUsernameInput.sendKeys(username);
+        insertData(userSearchUsernameInput, username);
         return this;
     }
 
     public UserManagementSection searchSelectRoleAdmin() {
-        waitHelper.waitUntilVisibility(userSearchUserRoleInput);
-        userSearchUserRoleInput.click();
-        waitHelper.waitUntilVisibility(userSearchAdminRoleOption);
-        userSearchAdminRoleOption.click();
+        click(userSearchUserRoleInput);
+        click(userSearchAdminRoleOption);
         return this;
     }
 
     public UserManagementSection searchSelectESS() {
-        waitHelper.waitUntilVisibility(userSearchUserRoleInput);
-        userSearchUserRoleInput.click();
-        waitHelper.waitUntilVisibility(userSearchEssRoleOption);
-        userSearchEssRoleOption.click();
+        click(userSearchUserRoleInput);
+        click(userSearchEssRoleOption);
         return this;
     }
 
     public UserManagementSection searchEnterEmployeeName(String name) {
-        waitHelper.waitUntilVisibility(userSearchEmployeeNameInput);
-        userSearchEmployeeNameInput.sendKeys(name);
+        insertData(userSearchEmployeeNameInput, name);
         return this;
     }
 
     public UserManagementSection searchSelectStatusEnabled(){
-        waitHelper.waitUntilVisibility(selectStatusInput);
-        selectStatusInput.click();
-        waitHelper.waitUntilVisibility(enabledOption);
-        enabledOption.click();
+        click(selectStatusInput);
+        click(enabledOption);
         return this;
     }
 
     public UserManagementSection searchSelectStatusDisabled(){
-        waitHelper.waitUntilVisibility(selectStatusInput);
-        selectStatusInput.click();
-        waitHelper.waitUntilVisibility(disabledOption);
-        disabledOption.click();
+        click(selectStatusInput);
+        click(disabledOption);
         return this;
     }
 
     public UserManagementSection clickOnReset(){
-        waitHelper.waitUntilVisibility(resetBtn);
-        resetBtn.click();
+        click(resetBtn);
         return this;
     }
 
     public UserManagementSection clickOnSearch(){
-        waitHelper.waitUntilVisibility(searchBtn);
-        searchBtn.click();
+        click(searchBtn);
         return this;
     }
 

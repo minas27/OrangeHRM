@@ -1,10 +1,13 @@
 package business.pages.adminPage.jobSection;
 
 import business.pages.adminPage.AdminPage;
+import core.ActionsHelper;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static core.ActionsHelper.*;
 
 public class PayGradesSection extends AdminPage {
     public PayGradesSection(WebDriver driver) {
@@ -27,39 +30,28 @@ public class PayGradesSection extends AdminPage {
     private WebElement requiredWarningMessage;
 
     public PayGradesSection clickOnSave(){
-        waitHelper.waitUntilVisibility(saveBtn);
-        saveBtn.click();
+        click(saveBtn);
         return this;
     }
 
     public PayGradesSection clickOnCancel(){
-        waitHelper.waitUntilVisibility(cancelBtn);
-        cancelBtn.click();
+        click(cancelBtn);
         return this;
     }
 
     public PayGradesSection clickOnAdd(){
-        waitHelper.waitUntilVisibility(addBtn);
-        addBtn.click();
+        click(addBtn);
         return this;
     }
 
     public PayGradesSection enterName(String name){
-        waitHelper.waitUntilVisibility(nameInput);
-        nameInput.sendKeys(name);
+        insertData(nameInput, name);
         return this;
     }
 
     //TODO add remove and edit functionality for a given grade
 
     public Boolean isRequiredMessageDisplayed(){
-        try {
-            waitHelper.waitUntilVisibility(requiredWarningMessage);
-            return requiredWarningMessage.isDisplayed();
-        }
-
-        catch (NoSuchElementException e) {
-            return false;
-        }
+        return isDisplayed(requiredWarningMessage);
     }
 }
