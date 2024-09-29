@@ -1,5 +1,6 @@
 package autotests;
 
+import business.factory.DriverManager;
 import business.pages.adminPage.AdminPage;
 import business.pages.adminPage.jobSection.JobTitlesSection;
 import business.pages.adminPage.jobSection.WorkShiftsSection;
@@ -9,14 +10,17 @@ import business.pages.LeftMenuComponent;
 import business.pages.LoginPage;
 import core.ActionsHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import java.io.File;
+import java.io.IOException;
 
 import static business.data.CommonData.BASE_URL;
 
 public class BaseTest {
-    private static ChromeDriver chromeDriver;
 
     protected LoginPage loginPage;
 
@@ -34,33 +38,46 @@ public class BaseTest {
 
     protected static ActionsHelper actionsHelper;
 
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-
-    public BaseTest() {
-        WebDriverManager.chromedriver().setup();
-        chromeDriver = new ChromeDriver();
-        actionsHelper = new ActionsHelper();
-        loginPage = new LoginPage(chromeDriver);
-        leftMenuComponent = new LeftMenuComponent(chromeDriver);
-        dashboardPage = new DashboardPage(chromeDriver);
-        adminPage = new AdminPage(chromeDriver);
-        userManagementSection = new UserManagementSection(chromeDriver);
-        jobTitlesSection = new JobTitlesSection(chromeDriver);
-        workShiftsSection = new WorkShiftsSection(chromeDriver);
+    public void setDriver(WebDriver driver){
+        this.driver.set(driver);
     }
 
-    public static ChromeDriver getDriver(){
-        return chromeDriver;
+    protected WebDriver getDriver(){
+        return this.driver.get();
     }
 
+    @Parameters("browser")
     @BeforeMethod
-    public void setup() {
-        chromeDriver.manage().window().maximize();
-        chromeDriver.get(BASE_URL);
+    public void startDriver(@Optional String browser){
+        browser = System.getProperty("browser", browser);
+        setDriver(new DriverManager().initializeDriver(browser));
+        getDriver().get(BASE_URL);
+        actionsHelper = new ActionsHelper();
+        loginPage = new LoginPage(getDriver());
+        leftMenuComponent = new LeftMenuComponent(getDriver());
+        dashboardPage = new DashboardPage(getDriver());
+        adminPage = new AdminPage(getDriver());
+        userManagementSection = new UserManagementSection(getDriver());
+        jobTitlesSection = new JobTitlesSection(getDriver());
+        workShiftsSection = new WorkShiftsSection(getDriver());
+        System.out.println("CURRENT THREAD: " + Thread.currentThread().getId() + ", " + "DRIVER = " + getDriver());
     }
 
-    @AfterSuite(alwaysRun = true)
-    public void close() {
-        chromeDriver.close();
+    @Parameters("browser")
+    @AfterMethod
+    public void quitDriver(@Optional String browser, ITestResult result) throws IOException {
+        getDriver().close();
+        System.out.println("Current thread: " + Thread.currentThread().getId() + ", " + "Driver = " + getDriver());
+//        if(result.getStatus() == ITestResult.FAILURE){
+//            File destFile = new File("scr" + File.separator +
+//                    browser + File.separator +
+//                    result.getTestClass().getRealClass().getSimpleName() +
+//                    "_" + result.getMethod().getMethodName() + ".png");
+//            takeScreenshot(destFile);
+//            takeScreenshotUsingAShot(destFile);
+//        }
     }
+
 }

@@ -1,38 +1,22 @@
 package business.pages.adminPage;
 
-import core.ActionsHelper;
+import business.objects.UserData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 import static core.ActionsHelper.*;
+import static core.WaitHelper.pause;
+import static core.WaitHelper.waitUntilVisibility;
 
 public class UserManagementSection extends AdminPage {
 
     @FindBy(css = "div[class='oxd-input-group oxd-input-field-bottom-space'] div input[class='oxd-input oxd-input--active']")
     private WebElement userSearchUsernameInput;
 
-    @FindBy(css = "(//div[contains(text(),'-- Select --')])[1]")
-    private WebElement userSearchUserRoleInput;
-
-    @FindBy(xpath = "//span[contains(text(),'Admin')]")
-    private WebElement userSearchAdminRoleOption;
-
-    @FindBy(xpath = "//span[contains(text(),'ESS')]")
-    private WebElement userSearchEssRoleOption;
-
     @FindBy(css = "input[placeholder='Type for hints...']")
-    private WebElement userSearchEmployeeNameInput;
-
-    @FindBy(css = "(//div[contains(text(),'-- Select --')])[2]")
-    private WebElement selectStatusInput;
-
-    @FindBy(xpath = "//span[normalize-space()='Enabled']")
-    private WebElement enabledOption;
-
-    @FindBy(xpath = "//span[normalize-space()='Disabled']")
-    private WebElement disabledOption;
+    private WebElement userEmployeeNameInput;
 
     @FindBy(xpath = "//*[text()=\" Reset \"]")
     private WebElement resetBtn;
@@ -49,6 +33,15 @@ public class UserManagementSection extends AdminPage {
     @FindBy(xpath = "//button[normalize-space()='No, Cancel']")
     private WebElement noCancelBtn;
 
+    @FindBy(xpath = "//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//i")
+    private WebElement userRoleDropdownBtn;
+
+    @FindBy(xpath = "//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input-group')]//i")
+    private WebElement statusDropdownBtn;
+
+    @FindBy(xpath = "//button[normalize-space()='Cancel']")
+    private WebElement newUserCancelBtn;
+
     public UserManagementSection(WebDriver driver) {
         super(driver);
     }
@@ -58,32 +51,22 @@ public class UserManagementSection extends AdminPage {
         return this;
     }
 
-    public UserManagementSection searchSelectRoleAdmin() {
-        click(userSearchUserRoleInput);
-        click(userSearchAdminRoleOption);
+    public UserManagementSection enterUserRole(String role) {
+        click(userRoleDropdownBtn);
+        click(getDriver().findElement(By.xpath("//span[contains(text(),'" + role + "')]")));
         return this;
     }
 
-    public UserManagementSection searchSelectESS() {
-        click(userSearchUserRoleInput);
-        click(userSearchEssRoleOption);
+    public UserManagementSection enterEmployeeName(String name) throws InterruptedException {
+        insertData(userEmployeeNameInput, name);
+        pause(3);
+        click(getDriver().findElement(By.xpath("//div[contains(@class, 'oxd-autocomplete-dropdown')]//div[contains(@class, 'oxd-autocomplete-option')]/span[contains(text(), '" + name + "')]")));
         return this;
     }
 
-    public UserManagementSection searchEnterEmployeeName(String name) {
-        insertData(userSearchEmployeeNameInput, name);
-        return this;
-    }
-
-    public UserManagementSection searchSelectStatusEnabled(){
-        click(selectStatusInput);
-        click(enabledOption);
-        return this;
-    }
-
-    public UserManagementSection searchSelectStatusDisabled(){
-        click(selectStatusInput);
-        click(disabledOption);
+    public UserManagementSection userStatus(String status){
+        click(statusDropdownBtn);
+        click(getDriver().findElement(By.xpath("//span[normalize-space()='" + status + "']")));
         return this;
     }
 
@@ -101,36 +84,77 @@ public class UserManagementSection extends AdminPage {
         String formattedXpath = String.format("//div[text() = '%s']", searchText);
 
         try {
-            waitHelper.waitUntilVisibility(By.xpath(formattedXpath));
+            waitUntilVisibility(By.xpath(formattedXpath));
             WebElement searchResult = getDriver().findElement(By.xpath(formattedXpath));
             return searchResult.isDisplayed();
 
-        } catch (NoSuchElementException | TimeoutException e) {
+        } catch (NoSuchElementException | TimeoutException | NullPointerException e) {
             return false;
         }
     }
 
-    //TODO implement find UserNameRowElement by given username
-    public WebElement findRowOfUserByUsername(String username){
-        List<WebElement> rows = getDriver().findElements(By.className("oxd-table-row"));
-        WebElement usernameCell = null;
-        for (WebElement row : rows) {
-            try {
-                usernameCell = row.findElement(By.xpath(".//div[@role='row' and contains(text(), '" + username + "')]"));
-            } catch (NoSuchElementException e) {
-                continue;
-            }
+    public WebElement findRowOfUserByUsername(String username) {
+        try {
+            return getDriver().findElement(By.xpath("//div[contains(@class, 'oxd-table-row')][.//div[text()='" + username + "']]"));
+
+        } catch (NoSuchElementException e) {
+            return null;
         }
-        return usernameCell;
     }
 
-    //TODO implement delete user with given username value
-    public void deleteUserByUsername(String username) {
-            if (findRowOfUserByUsername(username) != null) {
-                WebElement deleteButton = findRowOfUserByUsername(username).findElement(By.className("bi-trash"));
-                deleteButton.click();
-                waitHelper.waitUntilVisibility(yesDeleteBtn);
-                yesDeleteBtn.click();
-            }
+    public UserManagementSection deleteUserByUsername(String username) {
+        if (findRowOfUserByUsername(username) != null) {
+            WebElement deleteButton = findRowOfUserByUsername(username).findElement(By.xpath("//button[i[contains(@class, 'bi-trash')]]"));
+            click(deleteButton);
+            click(yesDeleteBtn);
         }
+        return this;
+    }
+
+    public UserManagementSection editUserByUsername(){
+        return this;
+    }
+
+    public UserManagementSection clickOnAdd() {
+        click(addNewUserBtn);
+        return new UserManagementSection(getDriver());
+    }
+
+    public UserManagementSection insertNewUserCredential(String label, String value) {
+        String xpath = String.format("//label[text()='%s']/parent::div/following-sibling::div//input", label);
+        WebElement inputField = getDriver().findElement(By.xpath(xpath));
+        insertData(inputField, value);
+        return this;
+    }
+
+    public UserManagementSection newUserOperation(String action){
+        click(getDriver().findElement(By.xpath("//button[normalize-space()='" + action + "']")));
+        return this;
+    }
+
+    public void createNewUser(UserData userData) throws InterruptedException {
+        clickOnAdd();
+        enterUserRole(userData.getUserRole());
+        enterEmployeeName(userData.getEmployeeName());
+        userStatus(userData.getStatus());
+        insertNewUserCredential("Username", userData.getUsername());
+        insertNewUserCredential("Password", userData.getPassword());
+        insertNewUserCredential("Confirm Password", userData.getPassword());
+        newUserOperation("Save");
+    }
+
+    public boolean isErrorMessageDisplayed(String errorMessage) {
+        String xpath = String.format("//span[contains(@class, 'oxd-input-field-error-message') and text()='%s']", errorMessage);
+
+        try {
+            WebElement errorElement = getDriver().findElement(By.xpath(xpath));
+            waitUntilVisibility(errorElement);
+            return errorElement.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        catch (TimeoutException e) {
+            return false;
+        }
+    }
 }

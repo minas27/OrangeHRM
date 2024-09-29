@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static core.WaitHelper.waitUntilClickable;
 import static core.WaitHelper.waitUntilVisibility;
 
 public class ActionsHelper {
@@ -35,8 +36,12 @@ public class ActionsHelper {
         executor.executeScript(String.format("window.scrollBy(0, %s)", pixel));
     }
 
+    public static void scrollIntoView(WebElement driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
     public static void click(WebElement element) {
-        waitUntilVisibility(element);
+        waitUntilClickable(element);
         element.click();
     }
 

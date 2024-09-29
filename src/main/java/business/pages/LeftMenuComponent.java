@@ -1,6 +1,5 @@
 package business.pages;
 
-import business.BasePage;
 import business.pages.adminPage.AdminPage;
 import business.pages.dashboardPage.DashboardPage;
 import org.openqa.selenium.WebDriver;

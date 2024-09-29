@@ -2,8 +2,12 @@
 
 <suite name="Autotests">
     <test name="Login test">
-        <classes>
-            <class name="autotests.login.LoginTest"/>
-        </classes>
+<!--        <classes>-->
+<!--            <class name="autotests.login.LoginTest"/>-->
+<!--        </classes>-->
+        <parameter name="browser" value="EDGE"></parameter>
+        <packages>
+            <package name="autotests.login"></package>
+        </packages>
     </test>
 </suite>

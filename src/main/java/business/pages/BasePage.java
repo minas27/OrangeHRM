@@ -1,4 +1,4 @@
-package business;
+package business.pages;
 
 import core.WaitHelper;
 import org.openqa.selenium.WebDriver;

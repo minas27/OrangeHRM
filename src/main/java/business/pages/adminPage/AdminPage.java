@@ -1,8 +1,7 @@
 package business.pages.adminPage;
 
-import business.BasePage;
+import business.pages.BasePage;
 import business.pages.adminPage.jobSection.*;
-import core.ActionsHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
