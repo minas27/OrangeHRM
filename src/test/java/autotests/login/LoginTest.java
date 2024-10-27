@@ -15,4 +15,9 @@ public class LoginTest extends BaseTest {
         leftMenuComponent.clickOnExpandButton();
         Assert.assertFalse(leftMenuComponent.isLeftMenuExpanded());
     }
+
+    @Test
+    public void testCase1() {
+
+    }
 }

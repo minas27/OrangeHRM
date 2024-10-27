@@ -17,12 +17,11 @@ public class BasePage {
 
     public BasePage(WebDriver driver){
         PageFactory.initElements(driver, this);
-        waitHelper = new WaitHelper(driver);
         this.driver = driver;
     }
 
     public void clickOnHelpButton(){
-        waitHelper.waitUntilVisibility(helpCenterButton);
+        WaitHelper.waitUntilVisibility(helpCenterButton);
         helpCenterButton.click();
     }
 

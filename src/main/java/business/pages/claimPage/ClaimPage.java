@@ -1,6 +1,6 @@
 package business.pages.claimPage;
 
-import business.BasePage;
+import business.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
 public class ClaimPage extends BasePage {

@@ -6,21 +6,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static core.ActionsHelper.click;
+
 public class EmployeeListSection extends BasePage {
-    @FindBy(xpath = "(//input[@placeholder='Type for hints...'])[1]")
+    @FindBy(xpath = "//div[contains(@class, 'oxd-input-group') and .//label[text()='Employee Id']]//input")
     private WebElement employeeNameInput;
 
-    @FindBy(xpath = "//div[contains(@class, 'oxd-input-group') and .//label[text()='Employee Id']]//input")
+    @FindBy(xpath = "//label[text()='Employee Id']/ancestor::div[contains(@class, 'oxd-input-group')]//input")
     private WebElement employeeID;
 
-    @FindBy(xpath = "//label[text()='Employment Status']/ancestor::div[contains(@class, 'oxd-input-group')]/descendant::i[contains(@class, 'oxd-select-text--arrow')]")
+    @FindBy(xpath = "//label[text()='Employment Status']/ancestor::div[contains(@class, 'oxd-input-group')]//i[contains(@class, 'oxd-icon')]")
     private WebElement employmentStatusDropdownBtn;
 
-    @FindBy(xpath = "//label[text()='Include']/ancestor::div[contains(@class, 'oxd-input-group')]/descendant::i[contains(@class, 'oxd-select-text--arrow')]")
+    @FindBy(xpath = "//div[contains(@class, 'oxd-grid-item')]//label[text()='Include']/following::div[contains(@class, 'oxd-select-text')][1]//i[contains(@class, 'oxd-icon')]")
     private WebElement includeDropdownBtn;
-
-    @FindBy(xpath = "//div[contains(text(),'Current Employees Only')]")
-    private WebElement includeCurrentEmployeesOnly;
 
     @FindBy(xpath = "//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--focus']//input[@placeholder='Type for hints...']")
     private WebElement supervisorNameInput;
@@ -42,17 +41,14 @@ public class EmployeeListSection extends BasePage {
 
 
     public EmployeeListSection selectEmploymentStatus(String statusOption){
-        waitHelper.waitUntilVisibility(employmentStatusDropdownBtn);
-        employmentStatusDropdownBtn.click();
+        click(employmentStatusDropdownBtn);
         WebElement option = getEmploymentStatusByName(statusOption);
-        waitHelper.waitUntilVisibility(option);
-        option.click();
+        click(option);
         return this;
     }
 
     public EmployeeListSection selectIncludeOptionByName(String includeOption){
-        waitHelper.waitUntilVisibility(includeDropdownBtn);
-        includeDropdownBtn.click();
+        click(includeDropdownBtn);
         return this;
     }
 }

@@ -8,7 +8,7 @@ import static core.ActionsHelper.scrollDown;
 
 public class WorkShiftsSectionTest extends BaseTest {
     @Test
-    public void checkWorkshiftAddinFunctionality(){
+    public void checkWorkshiftAddingFunctionality() {
         Assert.assertTrue(loginPage.isOnLoginPage());
         loginPage.fillInUsername("Admin");
         loginPage.fillInPassword("admin123");
@@ -30,6 +30,7 @@ public class WorkShiftsSectionTest extends BaseTest {
                 .clickOnSave();
         Assert.assertTrue(workShiftsSection.isAddedShiftDisplayed("Nighty"));
     }
+
     @Test
     public void checkWorkShiftDeletingFunctionality() {
         Assert.assertTrue(loginPage.isOnLoginPage());

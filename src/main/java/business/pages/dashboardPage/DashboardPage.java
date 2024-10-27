@@ -1,6 +1,6 @@
 package business.pages.dashboardPage;
 
-import business.BasePage;
+import business.pages.BasePage;
 import business.pages.leavePage.AssignLeaveSection;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

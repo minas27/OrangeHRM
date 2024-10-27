@@ -1,6 +1,6 @@
 package business.pages.recruitmentPage;
 
-import business.BasePage;
+import business.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
 public class RecruitmentPage extends BasePage {

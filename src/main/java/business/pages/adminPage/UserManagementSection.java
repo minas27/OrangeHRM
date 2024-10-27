@@ -1,21 +1,22 @@
 package business.pages.adminPage;
 
 import business.objects.UserData;
+import core.CommonElements;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 import static core.ActionsHelper.*;
+import static core.CommonElements.*;
 import static core.WaitHelper.pause;
 import static core.WaitHelper.waitUntilVisibility;
 
 public class UserManagementSection extends AdminPage {
+    private CommonElements commonElements;
 
     @FindBy(css = "div[class='oxd-input-group oxd-input-field-bottom-space'] div input[class='oxd-input oxd-input--active']")
     private WebElement userSearchUsernameInput;
 
-    @FindBy(css = "input[placeholder='Type for hints...']")
+    @FindBy(css = "//label[text()='Employee Name']/ancestor::div[contains(@class, 'oxd-input-group')]//input")
     private WebElement userEmployeeNameInput;
 
     @FindBy(xpath = "//*[text()=\" Reset \"]")
@@ -23,15 +24,6 @@ public class UserManagementSection extends AdminPage {
 
     @FindBy(xpath = "//*[text()=\" Search \"]")
     private WebElement searchBtn;
-
-    @FindBy(xpath = "//button[normalize-space()='Add']")
-    private WebElement addNewUserBtn;
-
-    @FindBy(xpath = "//button[normalize-space()='Yes, Delete']")
-    private WebElement yesDeleteBtn;
-
-    @FindBy(xpath = "//button[normalize-space()='No, Cancel']")
-    private WebElement noCancelBtn;
 
     @FindBy(xpath = "//label[text()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//i")
     private WebElement userRoleDropdownBtn;
@@ -44,6 +36,7 @@ public class UserManagementSection extends AdminPage {
 
     public UserManagementSection(WebDriver driver) {
         super(driver);
+       this.commonElements = new CommonElements(driver);
     }
 
     public UserManagementSection searchEnterUsername(String username) {
@@ -81,32 +74,25 @@ public class UserManagementSection extends AdminPage {
     }
 
     public boolean isSearchResultDisplayed(String searchText) {
-        String formattedXpath = String.format("//div[text() = '%s']", searchText);
-
+        String xPath = String.format("//div[normalize-space()='%s']", searchText); // normalize space in case there are extra spaces
         try {
-            waitUntilVisibility(By.xpath(formattedXpath));
-            WebElement searchResult = getDriver().findElement(By.xpath(formattedXpath));
-            return searchResult.isDisplayed();
+            pause(1);
+            WebElement searchResult = getDriver().findElement(By.xpath(xPath)); // Wait for the element to be visible
+            return searchResult != null && searchResult.isDisplayed(); // Ensure it's not null and visible
 
         } catch (NoSuchElementException | TimeoutException | NullPointerException e) {
             return false;
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public WebElement findRowOfUserByUsername(String username) {
-        try {
-            return getDriver().findElement(By.xpath("//div[contains(@class, 'oxd-table-row')][.//div[text()='" + username + "']]"));
-
-        } catch (NoSuchElementException e) {
-            return null;
-        }
-    }
 
     public UserManagementSection deleteUserByUsername(String username) {
-        if (findRowOfUserByUsername(username) != null) {
-            WebElement deleteButton = findRowOfUserByUsername(username).findElement(By.xpath("//button[i[contains(@class, 'bi-trash')]]"));
+        if (commonElements.findRowOfUserByUsername(username) != null) {
+            WebElement deleteButton = commonElements.findRowOfUserByUsername(username).findElement(By.xpath("//button[i[contains(@class, 'bi-trash')]]"));
             click(deleteButton);
-            click(yesDeleteBtn);
+            click(commonElements.getYesDeleteBtn());
         }
         return this;
     }
@@ -116,7 +102,7 @@ public class UserManagementSection extends AdminPage {
     }
 
     public UserManagementSection clickOnAdd() {
-        click(addNewUserBtn);
+        click(commonElements.getAddBtn());
         return new UserManagementSection(getDriver());
     }
 

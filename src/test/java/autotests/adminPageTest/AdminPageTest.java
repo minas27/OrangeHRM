@@ -44,7 +44,7 @@ public class AdminPageTest extends BaseTest {
         Assert.assertFalse(userManagementSection.isSearchResultDisplayed(user.getUsername()));
         scrollDown(getDriver(), -300);
         userManagementSection.createNewUser(user);
-        scrollDown(getDriver(), 900);
+        pause(5);
         Assert.assertTrue(userManagementSection.isSearchResultDisplayed(user.getUsername()));
         userManagementSection
                 .searchEnterUsername(user.getUsername())
@@ -52,6 +52,21 @@ public class AdminPageTest extends BaseTest {
         pause(2);
         userManagementSection.deleteUserByUsername(user.getUsername());
         Assert.assertFalse(userManagementSection.isSearchResultDisplayed(user.getUsername()));
+    }
+
+    @Test
+    public void testSearchFunctionality() throws InterruptedException, IOException {
+        UserData user = JacksonHelper.deserializeJson("userData.json", UserData.class);
+        loginPage.fillInUsername("Admin");
+        loginPage.fillInPassword("admin123");
+        loginPage.clickOnLogin();
+        leftMenuComponent
+                .goToAdminPage(getDriver())
+                .openUsersSection(getDriver())
+                .searchEnterUsername("Admin194")
+                .clickOnSearch();
+        scrollDown(getDriver(), 300);
+        Assert.assertTrue(userManagementSection.isSearchResultDisplayed("Admin194"));
     }
 
 }

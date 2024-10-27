@@ -41,6 +41,7 @@ public class ActionsHelper {
     }
 
     public static void click(WebElement element) {
+        waitUntilVisibility(element);
         waitUntilClickable(element);
         element.click();
     }

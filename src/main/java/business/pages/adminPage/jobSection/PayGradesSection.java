@@ -1,23 +1,27 @@
 package business.pages.adminPage.jobSection;
 
 import business.pages.adminPage.AdminPage;
-import core.ActionsHelper;
-import org.openqa.selenium.NoSuchElementException;
+import core.CommonElements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static core.ActionsHelper.*;
+import static core.CommonElements.*;
 
 public class PayGradesSection extends AdminPage {
+    private CommonElements commonElements;
+
     public PayGradesSection(WebDriver driver) {
         super(driver);
+        this.commonElements = new CommonElements(driver);
     }
 
     @FindBy(xpath = "//button[normalize-space()='Add']")
     private WebElement addBtn;
 
-    @FindBy(xpath = "//div[@class='oxd-input-group oxd-input-field-bottom-space']//div//input[@class='oxd-input oxd-input--active']")
+    @FindBy(xpath = "//div[@class='oxd-input-group__label-wrapper']//label[text()='Name']/ancestor::div[contains(@class, 'oxd-input-group')]//input")
     private WebElement nameInput;
 
     @FindBy(css = "[type='submit']")
@@ -25,9 +29,6 @@ public class PayGradesSection extends AdminPage {
 
     @FindBy(xpath = "//button[normalize-space()='Cancel']")
     private WebElement cancelBtn;
-
-    @FindBy(xpath = "//*[text()='Required']")
-    private WebElement requiredWarningMessage;
 
     public PayGradesSection clickOnSave(){
         click(saveBtn);
@@ -51,7 +52,12 @@ public class PayGradesSection extends AdminPage {
 
     //TODO add remove and edit functionality for a given grade
 
-    public Boolean isRequiredMessageDisplayed(){
-        return isDisplayed(requiredWarningMessage);
+    public PayGradesSection deleteUserByUsername(String username) {
+        if (commonElements.findRowOfUserByUsername(username) != null) {
+            WebElement deleteButton = commonElements.findRowOfUserByUsername(username).findElement(By.xpath("//button[i[contains(@class, 'bi-trash')]]"));
+            click(deleteButton);
+            click(commonElements.getYesDeleteBtn());
+        }
+        return this;
     }
 }
